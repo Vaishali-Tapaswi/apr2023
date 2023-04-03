@@ -1,3 +1,26 @@
+Lab2 - Lab2.go
+      //fmt main
+      package main
+      import(
+            "fmt"
+      )
+      func hello() string{
+            fmt.Println("Hello Invoked ...")
+            return "aa"
+      }
+      func main(){
+            //var i int 
+            //i = 1000
+          i := 1000
+            fmt.Println("Current Value of i = " , i)
+            i = 600
+            fmt.Println("Current Value of i = " , i)
+            hello()
+      }
+
+      Write a hi function to accept string and return Hello, String
+      Write a add function to accept int, int and return sum 
+
 Lab1 - 
       create Lab1.go
         package tmp
