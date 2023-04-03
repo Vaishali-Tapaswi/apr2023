@@ -1,3 +1,20 @@
+Lab 9 - Accept a number from user and print fibonacci series till that number
+Lab 8 - Accept input from user
+      package main
+      import(
+            "fmt"
+
+      )
+      func main(){
+      //	name:="aaa"
+            age :=10
+            fmt.Println("Current Age =", age)
+            fmt.Println("Enter your Age")
+            cnt, err:=fmt.Scan(&age)
+            fmt.Println("cnt = ", cnt , "err = ", err)
+            fmt.Println("Current Age =", age)
+
+      }
 Lab7 - to invoke defer in for loop
       check where defer evaluation happens
 Lab6 - 
