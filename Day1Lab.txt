@@ -1,4 +1,14 @@
-Lab2 - Lab2.go
+Lab3 - Write a function to swap two strings
+Lab2-2  - Lab2.go
+      Multiple Returns 
+            func calc(no1 , no2 int) (int, int){
+                  return no1+no2, no1-no2
+            }
+      invoke and print sum and sub both
+      don't use sub variable and see error
+      modify sub variable to _ 
+      
+Lab2-1 - Lab2.go
       //fmt main
       package main
       import(
