@@ -1,3 +1,37 @@
+Lab12 - demo/Lab3.go
+            package main
+            import "fmt"
+            func (emp *Emp) incr11( per int){
+                  fmt.Println("Original Emp in incr11 function ",emp)
+                  emp.Salary += emp.Salary*per/100
+                  fmt.Println("Original Emp in incr11  after change ",emp)
+            }
+
+            func incr(emp *Emp, per int){
+                  fmt.Println("Original Emp in incr function ",emp)
+                  emp.Salary += emp.Salary*per/100
+                  fmt.Println("Original Emp in incr  after change ",emp)
+            }
+            func main(){
+                  emp := Emp{1, "Vai",1000}
+                  fmt.Println("Before incr", emp)
+                  var em Emp
+                  incr(&em,10)
+
+                  emp.incr11(10)
+                  fmt.Println("After incr", emp)
+            }
+
+     create Emp.go
+            package main 
+            type Emp struct{
+                  Empno int
+                  Ename string
+                  Salary int
+            }
+      go run Lab3.go -> error
+      go run Lab3.go Emp.go -> success
+      
 Lab11 - demo2/Lab2.go
       Create Emp struct -> empno, ename, salary
       Create array 
