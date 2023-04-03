@@ -1,3 +1,27 @@
+Lab7 - to invoke defer in for loop
+      check where defer evaluation happens
+Lab6 - 
+      package main
+      import(
+            "fmt"
+            "os"
+            "strconv"
+      )
+      func main(){
+            defer	fmt.Println("Hello")
+            val, _ := strconv.Atoi(os.Args[1])
+            process(val)
+            fmt.Println("World")
+      }
+
+      func process(val int){
+            defer fmt.Println("line1")
+            fmt.Println("line2")
+            sum := 10/val
+            fmt.Println("line3= ", sum)
+
+      }
+
 Lab5 - accept command line args(numbers) 
       1. convert to number (strconv)
       2. print sum 
