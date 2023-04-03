@@ -1,3 +1,34 @@
+Lab14 - Emp.go 
+             empstruct + two receiver methods -> incr(pointer), print
+        EmpManager.go
+             array(3)+ append function , print (all elements of array)
+        Lab5 
+            to test the code
+Lab13 - demo/Lab4.go 
+
+            package main
+            import "fmt"
+
+            func main(){
+                        primes := [6]int{2, 3, 5, 7, 11, 13}
+                        fmt.Println(primes ,", Cap= " , cap(primes), ", Len = " , len(primes) )
+                        sl1 := primes[1:4]
+                        fmt.Println(sl1 ,", Cap= " , cap(sl1), ", Len = " , len(sl1) )
+                        sl1[0] = 111
+                        fmt.Println(primes ,", Cap= " , cap(primes), ", Len = " , len(primes) )
+                        fmt.Println(sl1 ,", Cap= " , cap(sl1), ", Len = " , len(sl1) )
+                        sl1 = append(sl1,55)
+                        //sl1[4] = 5500 -> Runtime - Panic
+                        fmt.Println("Primes:", primes ,", Cap= " , cap(primes), ", Len = " , len(primes) )
+                        fmt.Println("Sl1 :",sl1 ,", Cap= " , cap(sl1), ", Len = " , len(sl1) )
+                        sl1 = append(sl1,66)
+                        fmt.Println("Primes:", primes ,", Cap= " , cap(primes), ", Len = " , len(primes) )
+                        fmt.Println("Sl1 :",sl1 ,", Cap= " , cap(sl1), ", Len = " , len(sl1) )
+                        sl1 = append(sl1,77)
+                        fmt.Println("Primes:", primes ,", Cap= " , cap(primes), ", Len = " , len(primes) )
+                        fmt.Println("Sl1 :",sl1 ,", Cap= " , cap(sl1), ", Len = " , len(sl1) )
+
+            }
 Lab12 - demo/Lab3.go
             package main
             import "fmt"
