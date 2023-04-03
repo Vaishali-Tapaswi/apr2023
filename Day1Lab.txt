@@ -1,3 +1,32 @@
+Lab5 - accept command line args(numbers) 
+      1. convert to number (strconv)
+      2. print sum 
+Lab4 -
+      Check os documentation -  https://pkg.go.dev/
+      
+      package main
+      import(
+            "fmt"
+            "os"
+      )
+      func main(){
+            fmt.Println(os.Args)
+            fmt.Println("Length of os.Args is " ,len(os.Args))
+            if len(os.Args)<=1 {
+                  fmt.Println("No extra args passed")
+            }
+            for  i := 0; i < len(os.Args); i++{
+                  fmt.Println("i = ", i, ", Value= ", os.Args[i])
+            }
+            sum := 0
+            for sum < 100{
+                  fmt.Println("Current Sum = " , sum)
+                  sum+= 30
+            }
+            for{
+                  fmt.Println("inf...")
+            }
+      }
 Lab3 - Write a function to swap two strings
 Lab2-2  - Lab2.go
       Multiple Returns 
