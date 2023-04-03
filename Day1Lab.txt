@@ -1,0 +1,25 @@
+Lab1 - 
+      create Lab1.go
+        package tmp
+
+        import "fmt1"
+
+        func main(){
+          fmt.Println("Hello World !!")
+        }
+
+      go fmt Lab1.go 
+      observe errors - wrong import - GOROOT,dir , wrong package
+        modify fmt and main package
+        Press enter before { after main (check error)
+        change fmt.Println to println (check error)
+     
+      
+
+Installables
+        Go 1.x
+        Visual Studio Code
+        Postman
+        Check Directories  - c:\program files\go
+                             C:\Users\admin\go
+                             
