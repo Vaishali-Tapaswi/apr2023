@@ -1,3 +1,24 @@
+Lab11 - demo2/Lab2.go
+      Create Emp struct -> empno, ename, salary
+      Create array 
+            using for loop fill array with Emp objects accepting details from user
+      print using for loop
+Lab10 - demo2/Lab1.go
+      package main
+      import "fmt"
+      type Point struct{
+            X int
+            Y int
+      }
+      func main(){
+            var line [2]Point
+
+            line[0] = Point{30,60}
+
+            line[1] = Point{500,600}
+            fmt.Println(line)
+      }
+
 Lab 9 - Accept a number from user and print fibonacci series till that number
 Lab 8 - Accept input from user
       package main
