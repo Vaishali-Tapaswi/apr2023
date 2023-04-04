@@ -1,4 +1,37 @@
-	time.Sleep(time.Duration(rand.Int()%100) * time.Millisecond)
+Lab 8 - Modify Sender to have for loop of 10 items
+	Change make call to pass size as 5
+	Modify receive to write range 
+Lab 7 - channel 
+	package main
+	import (
+		"time"
+		"fmt"
+	)
+	func main(){
+
+		c := make(chan string)
+		go sender(c)
+		go receiver(c)
+		time.Sleep(10 * time.Second)
+		fmt.Println("main Over")
+
+	}
+	func receiver(ch chan string){
+		fmt.Println("Waiting for channel input")
+		s := <-ch
+		fmt.Println("Got ", s, " on channel ")
+
+	}
+	func sender(ch chan string){
+		fmt.Println("Sending str1 to channel")
+		ch <- "str1"
+		fmt.Println("Finished sending str1 to channel")
+	/*	fmt.Println("Sending str2 to channel")
+		ch <- "str2"
+		fmt.Println("Finished sending str2 to channel")*/
+	}
+
+time.Sleep(time.Duration(rand.Int()%100) * time.Millisecond)
 Lab6 - Three different go routines as Option1(Delhi), 2(Blr) and 3(Hyd)
             Whichever go routine finishes first should be chosen option.
             use math library to generate random sleep. 
