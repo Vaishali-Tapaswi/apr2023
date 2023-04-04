@@ -1,0 +1,19 @@
+Lab1 - Day2/demo1/Lab1.go - closures
+      package main
+      import "fmt"
+
+      func adder() func(int) int {
+        sum := 0
+        fmt.Println("adder function invoked ...")
+        return func(x int) int {
+          sum += x
+          fmt.Println("in return function with ", x , " and current sum is " , sum)
+          return sum
+        }
+      }
+      func main(){
+        fn1 := adder()
+        fn1(10)
+        fn1(11)
+
+      }
