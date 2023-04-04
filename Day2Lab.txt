@@ -1,3 +1,23 @@
+Lab6 - Three different go routines as Option1(Delhi), 2(Blr) and 3(Hyd)
+            Whichever go routine finishes first should be chosen option.
+            use math library to generate random sleep. 
+Lab5 -  Go Routines 
+        demo2/Lab1.go 
+            package main
+            import "fmt"
+            func main(){
+                        fmt.Println("start of main")
+                        go helper("-")
+                        go helper("*")
+
+                        fmt.Println("end of main")
+                        for{}
+            }
+            func helper(str string){
+                        for i:=1;i<10000;i++{
+                               fmt.Print(str," ")
+                        }
+            }
 Lab4 - Create two Structures
             2DPoint (X, Y)
             3DPoint (X, Y, Z)
