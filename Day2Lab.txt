@@ -1,6 +1,50 @@
+
 Lab 8 - Modify Sender to have for loop of 10 items
 	Change make call to pass size as 5
 	Modify receive to write range 
+-------
+    for {
+       select {
+          case c <- x:
+	x, y = y, x+y
+          case <-quit:
+	fmt.Println("quit")
+	return
+	}
+  }
+
+
+-------
+	package main
+	import (
+		"time"
+		"fmt"
+		"strconv"
+	)
+	func main(){
+		c := make(chan string,10)
+		go sender(c)
+		go receiver(c)
+		time.Sleep(20 * time.Second)
+		fmt.Println("main Over")
+
+	}
+	func receiver(ch chan string){
+		fmt.Println("Waiting for channel input")
+		for _, _ = range <-ch{
+			s := <-ch
+			fmt.Println(".......Got ", s, " on channel ")
+		}
+
+	}
+	func sender(ch chan string){
+		for i:=0;i<10;i++{
+			fmt.Println("Sending str",i," to channel")
+			ch <- "str"+strconv.Itoa(i)
+			fmt.Println("Finished sending str",i," to channel")
+		}
+	}
+
 Lab 7 - channel 
 	package main
 	import (
