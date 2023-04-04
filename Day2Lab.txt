@@ -1,6 +1,37 @@
 Lab6 - Three different go routines as Option1(Delhi), 2(Blr) and 3(Hyd)
             Whichever go routine finishes first should be chosen option.
             use math library to generate random sleep. 
+            
+            package main
+            import (
+                        "time"
+            //	"math/rand"
+                        "fmt"
+            )
+            var finalcity = ""
+            func main(){
+                        fmt.Println("start of main")
+                        go helper("Delhi")
+                        go helper("Hyd")
+                        go helper("Blr")
+
+                        fmt.Println("end of main")
+                        time.Sleep(20 * time.Second)
+                        fmt.Println("main - Final Destination Choosen is " , finalcity)
+            }
+            func helper(str string){
+                        for i:=1;i<10;i++{
+                                    fmt.Print(str," ",i)
+                                    time.Sleep(100 * time.Millisecond)
+                        }
+                        if finalcity==""{
+                                    finalcity = str
+                                    fmt.Println("Final CIty is  " , finalcity)
+                        }
+
+            }
+
+
 Lab5 -  Go Routines 
         demo2/Lab1.go 
             package main
