@@ -1,4 +1,43 @@
+Lab 9 - modify code Sync.Mutex -> Lock and Unlock
+	package main
+	import (
+		"time"
+		"fmt"
+		"math/rand"
+	//	"strconv"
+		"sync"
+	)
 
+	type Bank struct{
+		Balance int
+	}
+	func main(){
+		bank := Bank{}
+		go Deposit(&bank)
+		go Widraw(&bank)
+		time.Sleep(40 * time.Second)
+		fmt.Println("main Over" , bank.Balance)
+
+	}
+	func Deposit(bank *Bank){
+		for i:=1; i<=100;i++{
+			bal := bank.Balance
+			time.Sleep(time.Duration(rand.Int()%100) * time.Millisecond)
+			bal++
+			bank.Balance = bal
+			fmt.Println("In Deposit - Current Balance =" , bank.Balance)
+		}
+	}
+	func Widraw(bank *Bank){
+		for i:=1; i<=100;i++{
+			bal := bank.Balance
+			time.Sleep(time.Duration(rand.Int()%100) * time.Millisecond)
+			bal--
+			bank.Balance = bal
+
+			fmt.Println("In Deposit - Current Balance =" , bank.Balance)
+		}
+	}
 Lab 8 - Modify Sender to have for loop of 10 items
 	Change make call to pass size as 5
 	Modify receive to write range  -> infinite for
