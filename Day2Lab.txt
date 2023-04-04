@@ -1,3 +1,29 @@
+Lab2 - panic/recover
+      package main
+
+      import "fmt"
+
+      func main() {
+            defer fmt.Println("in main defer line 1")
+            fmt.Println("starting of main")
+            test(4)
+            fmt.Println("after test")
+      }
+      func test(i int) {
+            defer func() {
+                  if r := recover(); r != nil {
+                        fmt.Println("Recovered in f", r)
+                  }
+            }()
+            defer fmt.Println("Defer in g", i)
+            if i > 3 {
+                  fmt.Println("Panicking!")
+                  panic(fmt.Sprintf("%v", i))
+            }
+            fmt.Println("Printing in g ", i)
+            //	   g(i + 1)
+      }
+
 Lab1 - Day2/demo1/Lab1.go - closures
       package main
       import "fmt"
