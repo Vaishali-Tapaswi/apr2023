@@ -1,3 +1,7 @@
+Lab 10 - Demo3 / Lab1.go
+	https://reqres.in/api/users/2
+	https://pkg.go.dev/net/http
+	
 Lab 9 - modify code Sync.Mutex -> Lock and Unlock
 	package main
 	import (
