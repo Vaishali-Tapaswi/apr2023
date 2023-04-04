@@ -1,3 +1,18 @@
+Lab12 - create a new folder
+	app.go
+		package main
+		import (
+			"database/sql"
+			_ "github.com/go-sql-driver/mysql"
+			"fmt"
+		)
+		func main(){
+			db, err := sql.Open("mysql", "admin:@mydb.cxmg6nnxkwnv.us-east-1.rds.amazonaws.com:3306/mydb")
+			fmt.Println("db",db)
+			fmt.Println("err",err)
+		}
+	cmd> create and tidy your module
+
 Lab 11 - in Demo3 folder
 	create Lab2.go
 		package main
