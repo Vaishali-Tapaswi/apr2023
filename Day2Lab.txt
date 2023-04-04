@@ -1,3 +1,31 @@
+Lab4 - Create two Structures
+            2DPoint (X, Y)
+            3DPoint (X, Y, Z)
+       interface Modify {
+            Add(int)
+            }
+       implement Modify for 2DPoint and 3DPoint 
+       Ask user choise of 2D/3D and using interface invoke add(5) 
+       
+Lab3 - package main
+      import "fmt"
+      type Myinterface interface{
+            Shift() 
+      }
+      type Point struct{
+            X int
+            Y int
+      }
+      func (pt Point) Shift(){
+            fmt.Println("Shift invoked ..")
+      }
+      func main() {
+            p1 := Point{10,10}
+            fmt.Println(p1)
+            var myinterface Myinterface
+            myinterface = p1
+            myinterface.Shift()
+      }
 Lab2 - panic/recover
       package main
 
