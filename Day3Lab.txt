@@ -1,3 +1,30 @@
+ Lab3 - For unmarshal 
+        download content from  https://reqres.in/api/users/2
+        Show me email address of user 2 (convert json to struct, unmarshal and just show data.email
+        
+ Lab2 - package main
+
+        import (
+            "encoding/json"
+            "fmt"
+        )
+        type Emp struct {
+            Empno   int    `json:"empno"`
+            Ename string `json:"empname"`
+            Salary  int    `json:"salary"`
+        }
+
+        func main() {
+            emp  :=Emp{1,"Vaishali",111}
+            b, err := json.Marshal(emp)
+            if err != nil {
+                fmt.Println("error:", err)
+            }
+            fmt.Println(string(b))
+            fmt.Println(emp)	
+        }
+
+
 Lab1 -
     BenchMarking
         add a method in Lab1_test.go
