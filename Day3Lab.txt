@@ -1,3 +1,70 @@
+Lab 6 - create three folders
+		Demo3withlib
+		Demo3withlib\dblib 
+		Demo3withlib\webapp
+	copy Demo2\EmpMgr.go in dblib
+	copy Demo2\Lab1.go in webapp
+----------
+package mylib
+
+import (
+	"database/sql"
+	"fmt"
+    _ "github.com/go-sql-driver/mysql"
+	"strconv"
+)
+
+type EmpManager struct{
+
+}
+type Emp struct {
+	Empno  int    `json:"empno"`
+	Ename  string `json:"ename"`
+	Salary int    `json:"salary"`
+}
+func (empmgr *EmpManager) connect() *sql.DB {
+	db, err := sql.Open("mysql", "admin:MyPassword@tcp(database-1.cxmg6nnxkwnv.us-east-1.rds.amazonaws.com:3306)/mydb")
+	if err != nil {
+		panic(err)
+	}
+	return db
+}
+func (empmgr *EmpManager) Insert(emp Emp) {
+	db :=empmgr.connect()
+	defer db.Close()
+	sql1 :=  "insert into emp values (" + strconv.Itoa(emp.Empno) +
+	 ",'" + emp.Ename + "','"+strconv.Itoa(emp.Salary)+"')"
+	fmt.Println("sql", sql1)
+	result, err := db.Exec(sql1)
+	if err != nil {
+		fmt.Println("Error " , err)
+	}
+	result.RowsAffected()
+	
+}
+
+func (empmgr *EmpManager) List() []Emp {
+	db := empmgr.connect()
+	defer db.Close()
+	res, err := db.Query("SELECT * FROM emp")
+	defer res.Close()
+	if err != nil {
+   		panic(err)
+	}
+	empslice:=make([]Emp,0)
+	for res.Next() {
+		emp := Emp{}
+		res.Scan(&emp.Empno, &emp.Ename, &emp.Salary)
+		empslice= append(empslice,emp)	
+	}
+	return empslice
+}
+
+
+
+-------------
+
+
 Lab5 - https://go.dev/doc/tutorial/create-module
 
 ------------
