@@ -1,4 +1,7 @@
-		if r.Method == "GET" {
+Lab5 - https://go.dev/doc/tutorial/create-module
+
+------------
+if r.Method == "GET" {
 			barr, _ := json.Marshal(empmgr.list())
 			fmt.Fprintln(w, string(barr))
 		}
