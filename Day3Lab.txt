@@ -1,4 +1,19 @@
-  EmpMgr.go
+		if r.Method == "GET" {
+			barr, _ := json.Marshal(empmgr.list())
+			fmt.Fprintln(w, string(barr))
+		}
+		if r.Method == "POST" {
+			fmt.Fprintln(w, "POST Request invoked ")
+			fmt.Println(w)
+			emp := Emp{}
+			decoder := json.NewDecoder(r.Body)
+			decoder.Decode(&emp)
+			fmt.Println(emp)
+			empmgr.add(emp)
+		}
+    -----------
+ 
+ EmpMgr.go
                 package main 
                 import (
                         "fmt"
