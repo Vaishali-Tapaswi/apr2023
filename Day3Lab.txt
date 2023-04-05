@@ -1,7 +1,38 @@
- Lab3 - For unmarshal 
+
+Lab3 - For unmarshal 
         download content from  https://reqres.in/api/users/2
         Show me email address of user 2 (convert json to struct, unmarshal and just show data.email
         
+        package main
+        import (
+         "net/http"
+          "fmt"
+         "io"
+         "encoding/json"
+        )
+        type User struct {
+         Data struct {
+          ID        int    `json:"id"`
+          Email     string `json:"email"`
+          FirstName string `json:"first_name"`
+          LastName  string `json:"last_name"`
+          Avatar    string `json:"avatar"`
+         } `json:"data"`
+         Support struct {
+          URL  string `json:"url"`
+          Text string `json:"text"`
+         } `json:"support"`
+        }
+
+        func main(){
+         resp, _ := http.Get("https://reqres.in/api/users/2")
+         defer resp.Body.Close()
+         body, _ := io.ReadAll(resp.Body)
+         fmt.Println(string(body))
+         usr := User{}
+         json.Unmarshal(body, &usr)
+         fmt.Println("EMail : " , usr.Data.Email)	
+        }
  Lab2 - package main
 
         import (
