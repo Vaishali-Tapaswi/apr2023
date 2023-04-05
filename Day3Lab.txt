@@ -1,0 +1,51 @@
+Lab1 - Testing 
+    Lab1.go 
+      package main
+      import (
+        "fmt"
+      )
+      func add(x, y int ) int {
+        return x+y
+      }
+      func divide(x, y int ) int {
+        return x/y
+      }
+      func main(){
+        fmt.Println("add with 10 and 20", add(10,20))
+        fmt.Println("divide with 100 and 20", divide(100,20))
+      }
+    
+  Lab1_test.go -> modify     TestDivide2 to add recover -> if divide raises the panic, then it passes the test case 
+    package main
+
+    import "testing"
+
+    func TestAdd(t *testing.T) {
+        got := add(10,30)
+        if got != 40 {
+            t.Errorf("add(10,30) = %d; want 40", got)
+        }
+    }
+
+    func TestDivide1(t *testing.T) {
+        got := divide(100,50)
+        if got != 2 {
+            t.Errorf("add(10,30) = %d; want 2", got)
+        }
+    }
+    // divide with 0 should panic, so recover and check if error is not nil -> pass
+    /*
+    func TestDivide2(t *testing.T) {
+        got := divide(100,0)
+        if got != 2 {
+            t.Errorf("add(10,30) = %d; want 2", got)
+        }
+    }
+    */
+ cmd>go test lab1_test.go lab1.go 
+ cmd>go test lab1_test.go lab1.go -v
+ cmd>go test lab1_test.go lab1.go -v --cover
+ cmd>go test Lab1_test.go Lab1.go -v -coverprofile tmp.txt
+ cmd>go tool cover -html=tmp.txt -o tmp.html
+ 
+ 
