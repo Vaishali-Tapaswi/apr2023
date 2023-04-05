@@ -1,83 +1,138 @@
-Lab 6 - create three folders
-		Demo3withlib
-		Demo3withlib\dblib 
-		Demo3withlib\webapp
-	copy Demo2\EmpMgr.go in dblib
-	copy Demo2\Lab1.go in webapp
-----------
-package dblib
+Create DOCKER Image FROM Database Connection Code
+create empty folder Demo5Docker1
+	copy webapp.exe in Demo5Docker1 
+create dockerfile in Demo5Docker1
+FROM  cloudfoundry/windows2016fs
+COPY ./webapp.exe .
+EXPOSE 8080
+CMD ["./webapp.exe"]
 
-import (
-	"fmt"
-	"database/sql"
-    _ "github.com/go-sql-driver/mysql"
-	"strconv"
-)
-type Emp struct {
-	Empno  int    `json:"empno"`
-	Ename  string `json:"empname"`
-	Salary int    `json:"salary"`
-}
-type EmpMgr struct {
-	
-}
-func (empmgr *EmpMgr) connect() *sql.DB {
-	db, err := sql.Open("mysql","admin:MyPassword@tcp(mydb.cxmg6nnxkwnv.us-east-1.rds.amazonaws.com:3306)/mydb")
-	if err != nil {
-		panic(err)
-	}
-	return db
-}
+Demo5Docker1>docker build . -t myimage
+------------------------------------------------
 
-func (empmgr *EmpMgr) Add(emp Emp) {
-	fmt.Println("EmpMgrAdd ", emp)
-	db :=empmgr.connect()
-	defer db.Close()
-	sql1 :=  "insert into emp values (" + strconv.Itoa(emp.Empno) +
-	 ",'" + emp.Ename + "','"+strconv.Itoa(emp.Salary)+"')"
-	fmt.Println("sql", sql1)
-	result, err := db.Exec(sql1)
-	if err != nil {
-		fmt.Println("Error " , err)
-	}
-	result.RowsAffected()
-}
+create three folders
+    Demo3withlib
+    Demo3withlib\dblib 
+    Demo3withlib\webapp
+   
+in Demo3withlib\dblib 
+    	Create EmpMgr.go
+		package dblib
 
-func (empmgr EmpMgr) List() []Emp {
-	db := empmgr.connect()
-	defer db.Close()
-	res, err := db.Query("SELECT * FROM emp")
-	defer res.Close()
-	if err != nil {
-   		panic(err)
-	}
-	empslice:=make([]Emp,0)
-	for res.Next() {
-		emp := Emp{}
-		res.Scan(&emp.Empno, &emp.Ename, &emp.Salary)
-		empslice= append(empslice,emp)	
-	}
-	return empslice
-}
+		import (
+			"fmt"
+			"database/sql"
+		   	 _ "github.com/go-sql-driver/mysql"
+			"strconv"
+		)
+		type Emp struct {
+			Empno  int    `json:"empno"`
+			Ename  string `json:"empname"`
+			Salary int    `json:"salary"`
+		}
+		type EmpMgr struct {
 
-/*
-func main(){
-	emp := Emp{1, "AA", 111}
-	empmgr := EmpMgr{}
-	empmgr.add(emp)
-	empmgr.add(Emp{2, "BB", 222})
-	for i, v:= range empmgr.list(){
-		fmt.Println(i, "  -  ", v)
-	}
-}
-*/
+		}
+		func (empmgr *EmpMgr) connect() *sql.DB {
+			db, err := sql.Open("mysql","admin:@tcp(mydb.cxmg6nnxkwnv.us-east-1.rds.amazonaws.com:3306)/mydb")
+			if err != nil {
+				panic(err)
+			}
+			return db
+		}
 
-}
+		func (empmgr *EmpMgr) Add(emp Emp) {
+			fmt.Println("EmpMgrAdd ", emp)
+			db :=empmgr.connect()
+			defer db.Close()
+			sql1 :=  "insert into emp values (" + strconv.Itoa(emp.Empno) +
+			 ",'" + emp.Ename + "','"+strconv.Itoa(emp.Salary)+"')"
+			fmt.Println("sql", sql1)
+			result, err := db.Exec(sql1)
+			if err != nil {
+				fmt.Println("Error " , err)
+			}
+			result.RowsAffected()
+		}
 
+		func (empmgr EmpMgr) List() []Emp {
+			db := empmgr.connect()
+			defer db.Close()
+			res, err := db.Query("SELECT * FROM emp")
+			defer res.Close()
+			if err != nil {
+				panic(err)
+			}
+			empslice:=make([]Emp,0)
+			for res.Next() {
+				emp := Emp{}
+				res.Scan(&emp.Empno, &emp.Ename, &emp.Salary)
+				empslice= append(empslice,emp)	
+			}
+			return empslice
+		}
 
+		/*
+		func main(){
+			emp := Emp{1, "AA", 111}
+			empmgr := EmpMgr{}
+			empmgr.add(emp)
+			empmgr.add(Emp{2, "BB", 222})
+			for i, v:= range empmgr.list(){
+				fmt.Println(i, "  -  ", v)
+			}
+		}
+		*/
 
--------------
+	cmd>go mod init fands.com/dblib
+	cmd>go mod tidy
 
+   in folder Demo3withlib\webapp
+   create Lab1.go
+		package main
+
+		import (
+			"encoding/json"
+			"fmt"
+			"io"
+			"log"
+			"net/http"
+			"fands.com/dblib"
+		)
+
+		var empmgr = dblib.EmpMgr{}
+
+		func main() {
+
+			empHandler := func(w http.ResponseWriter, req *http.Request) {
+				switch req.Method {
+				case "GET":
+					barr, _ := json.Marshal(empmgr.List())
+					fmt.Fprintln(w, string(barr))
+				case "POST":
+					fmt.Fprintln(w, "POST Request invoked ")
+					emp := dblib.Emp{}
+					decoder := json.NewDecoder(req.Body)
+					decoder.Decode(&emp)
+					fmt.Println(emp)
+					empmgr.Add(emp)
+				}
+
+			}
+			http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+				io.WriteString(w, "<h1><a href='emps'>List Employees</a></h1>")
+			})
+			http.HandleFunc("/emps", empHandler)
+
+			fmt.Println("Starting Server on 8080")
+			log.Fatal(http.ListenAndServe(":8080", nil))
+		}
+	cmd>go mod init fands.com/webapp
+	cmd>go mod edit -replace fands.com/dblib=../dblib
+	cmd>go mod tidy
+	cmd>go run .
+	cmd>go build .  (webapp.exe)
+-----------------------------------------------------	
 
 Lab5 - https://go.dev/doc/tutorial/create-module
 
