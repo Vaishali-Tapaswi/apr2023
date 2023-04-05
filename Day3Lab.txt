@@ -1,3 +1,34 @@
+Dedicated Docker Steps
+Create Lab1.go 
+	package main
+	import (
+	    "fmt"
+	    "net/http"
+	    "os"
+		"time"
+	)
+
+	func hello(w http.ResponseWriter, req *http.Request) {
+		hn,_ := os.Hostname()
+		fmt.Println("..time = ", time.Now())
+	    fmt.Fprintf(w, "<body bgcolor='cyan'><h1 >Hello World for Siemens !!!!</h1><h2>executed on server "+hn +"</h2></body>")
+	}
+
+	func main() {
+	    http.HandleFunc("/", hello) 
+	    fmt.Println("starting server on 8090")
+	    http.ListenAndServe(":8090", nil)
+	}
+create dockerfile
+	FROM golang:1.16-alpine
+	COPY Lab1.go ./
+	RUN go build -o ./Lab1 ./Lab1.go
+	EXPOSE 8090
+	CMD [ "./Lab1" ]
+cmd>docker build . -t myimg
+cmd>docker run -p 8090:8090 myimage
+	go to browser and check 8090
+----------------------------
 Create DOCKER Image FROM Database Connection Code
 create empty folder Demo5Docker1
 	copy webapp.exe in Demo5Docker1 
