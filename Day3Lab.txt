@@ -5,31 +5,32 @@ Lab 6 - create three folders
 	copy Demo2\EmpMgr.go in dblib
 	copy Demo2\Lab1.go in webapp
 ----------
-package mylib
+package dblib
 
 import (
-	"database/sql"
 	"fmt"
+	"database/sql"
     _ "github.com/go-sql-driver/mysql"
 	"strconv"
 )
-
-type EmpManager struct{
-
-}
 type Emp struct {
 	Empno  int    `json:"empno"`
-	Ename  string `json:"ename"`
+	Ename  string `json:"empname"`
 	Salary int    `json:"salary"`
 }
-func (empmgr *EmpManager) connect() *sql.DB {
-	db, err := sql.Open("mysql", "admin:MyPassword@tcp(database-1.cxmg6nnxkwnv.us-east-1.rds.amazonaws.com:3306)/mydb")
+type EmpMgr struct {
+	
+}
+func (empmgr *EmpMgr) connect() *sql.DB {
+	db, err := sql.Open("mysql","admin:MyPassword@tcp(mydb.cxmg6nnxkwnv.us-east-1.rds.amazonaws.com:3306)/mydb")
 	if err != nil {
 		panic(err)
 	}
 	return db
 }
-func (empmgr *EmpManager) Insert(emp Emp) {
+
+func (empmgr *EmpMgr) Add(emp Emp) {
+	fmt.Println("EmpMgrAdd ", emp)
 	db :=empmgr.connect()
 	defer db.Close()
 	sql1 :=  "insert into emp values (" + strconv.Itoa(emp.Empno) +
@@ -40,10 +41,9 @@ func (empmgr *EmpManager) Insert(emp Emp) {
 		fmt.Println("Error " , err)
 	}
 	result.RowsAffected()
-	
 }
 
-func (empmgr *EmpManager) List() []Emp {
+func (empmgr EmpMgr) List() []Emp {
 	db := empmgr.connect()
 	defer db.Close()
 	res, err := db.Query("SELECT * FROM emp")
@@ -58,6 +58,20 @@ func (empmgr *EmpManager) List() []Emp {
 		empslice= append(empslice,emp)	
 	}
 	return empslice
+}
+
+/*
+func main(){
+	emp := Emp{1, "AA", 111}
+	empmgr := EmpMgr{}
+	empmgr.add(emp)
+	empmgr.add(Emp{2, "BB", 222})
+	for i, v:= range empmgr.list(){
+		fmt.Println(i, "  -  ", v)
+	}
+}
+*/
+
 }
 
 
