@@ -1,3 +1,66 @@
+  EmpMgr.go
+                package main 
+                import (
+                        "fmt"
+                )
+                type Emp struct {
+                        Empno   int    `json:"empno"`
+                        Ename string `json:"empname"`
+                        Salary  int    `json:"salary"`
+                }
+                type EmpMgr struct{
+                        emparr []Emp
+                }
+                func (empmgr *EmpMgr) add( emp Emp){
+                        fmt.Println("EmpMgrAdd ", emp)
+                        empmgr.emparr = append(empmgr.emparr, emp)
+                }
+
+                func (empmgr EmpMgr) list() []Emp{
+                        fmt.Println("EmpMgrAdd ", len(empmgr.emparr))
+                        return empmgr.emparr
+                }
+                /*
+                func main(){
+                        emp := Emp{1, "AA", 111}	
+                        empmgr := EmpMgr{}
+                        empmgr.add(emp)
+                        empmgr.add(Emp{2, "BB", 222})
+                        for i, v:= range empmgr.list(){
+                                fmt.Println(i, "  -  ", v)
+                        }
+                }
+                */
+        Lab1.go 
+                package main
+
+                import (
+                        "io"
+                        "log"
+                        "net/http"
+                        "fmt"
+                )
+                var empmgr = EmpMgr{}
+                func main() {
+                        // Modify empHandler to use switch - get/post -> 
+                             // modify get to convert emp slice to json and write it on w
+                        empHandler := func(w http.ResponseWriter, req *http.Request) {
+                                empslice := empmgr.list()
+                                // marshal
+
+                                io.WriteString(w, "<h1>Hello, world!</h1>")
+                                fmt.Println(req.Method)
+                        }
+                        http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+                                io.WriteString(w, "<h1><a href='emps'>List Employees</a></h1>")
+                        })
+                        http.HandleFunc("/emps", empHandler)
+
+                        fmt.Println("Starting Server on 8080")
+                        log.Fatal(http.ListenAndServe(":8080", nil))
+                }
+
+---------------------------------
 
 Lab4 -
         Part3 - Modify Lab1.go to return Slice of Emps as JSON for get request
