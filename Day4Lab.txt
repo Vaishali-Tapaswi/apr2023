@@ -1,3 +1,5 @@
+Lab2 - write Lab2.go to create s3 bucket
+
 Lab1 -VqJ 
   In case of AWS CLI on laptop
     1. delete c:\users\[admin]\.aws folder
