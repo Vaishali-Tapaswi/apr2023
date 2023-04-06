@@ -1,0 +1,20 @@
+Lab1 -VqJ 
+  In case of AWS CLI on laptop
+    1. delete c:\users\[admin]\.aws folder
+    2. aws configure 
+          AWS Access Key ID [****************U7SO]: ___A5DX7KEDGVL3AU7SO
+          AWS Secret Access Key [****************WJ5Z]: ___lgwL2ea5xxuZoUwXF1+t5BRVL93iyq1H7WJ5Z
+          Default region name [us-east1]: us-east-1
+          Default output format [None]:
+    3. aws s3 ls
+ in case no cli on laptop
+  1. create file config  on c:\users\[admin]\.aws folder
+    [default]
+    region = us-east-1
+  2. create file config  on c:\users\[admin]\.aws folder
+    [default]
+    aws_access_key_id = ___A5DX7KEDGVL3AU7SO
+    aws_secret_access_key = ___lgwL2ea5xxuZoUwXF1+t5BRVL93iyq1H7WJ5Z
+
+  
+  
