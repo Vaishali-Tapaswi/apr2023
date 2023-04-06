@@ -26,15 +26,15 @@ create dockerfile
 	EXPOSE 8090
 	CMD [ "./Lab1" ]
 cmd>docker build . -t myimg
-cmd>docker run -p 8090:8090 myimage
+cmd>docker run -p 8090:8090 myimg
 	go to browser and check 8090
 ----------------------------
 Create DOCKER Image FROM Database Connection Code
 create empty folder Demo5Docker1
 	copy webapp.exe in Demo5Docker1 
 create dockerfile in Demo5Docker1
-FROM  cloudfoundry/windows2016fs
-COPY ./webapp.exe .
+FROM  windows / alpine image 
+COPY ./webapp.exe/linux runnable .
 EXPOSE 8080
 CMD ["./webapp.exe"]
 
