@@ -1,3 +1,37 @@
+Lab4 - day4\demo2
+          cmd>go.exe install github.com/aws/aws-lambda-go/cmd/build-lambda-zip@latest
+                   in Demo1\main.go
+                        package main
+
+                        import (
+                                "fmt"
+                                "context"
+                                "github.com/aws/aws-lambda-go/lambda"
+                        )
+
+                        type MyEvent struct {
+                                Name string `json:"name"`
+                        }
+
+                        func HandleRequest(ctx context.Context, event MyEvent) (string, error) {
+                                return fmt.Sprintf("Hello %s!", event.Name ), nil
+                        }
+
+                        func main() {
+                                lambda.Start(HandleRequest)
+                        }
+cmd\Demo>
+            go mod init hello
+            go mod tidy
+            set GOOS=linux
+            set GOARCH=amd64
+            set CGO_ENABLED=0
+            go build -o hello hello.go
+            %USERPROFILE%\Go\bin\build-lambda-zip.exe -o hello.zip hello
+
+            AWS Console -> create a lambda function - for go -> upload hello -> function name (hello),
+            test function locally
+       
 Lab 3 - AWS Console -> Lambda -> Create new default function in Node (default arch)
             From scratch-> test ->
          Add Trigger -> API Gateway -> security -> open
