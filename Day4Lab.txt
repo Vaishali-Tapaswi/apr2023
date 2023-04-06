@@ -1,5 +1,14 @@
 Lab7 - aws sdk Client Code for lambda
        https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/lambda-go-example-run-function.html
+       Invoke a function and write response in logfile
+              import os 
+              import logging 
+              logger = logging.getLogger() logger.setLevel(logging.INFO) 
+              def lambda_handler(event, context): 	
+                     logger.info('## ENVIRONMENT VARIABLES’) 
+                     logger.info(os.environ) logger.info('## EVENT’) 	logger.info(event)
+
+       
 Lab6 - Http Client Code
        package main
 
