@@ -1,3 +1,8 @@
+Lab 3 - AWS Console -> Lambda -> Create new default function in Node (default arch)
+            From scratch-> test ->
+         Add Trigger -> API Gateway -> security -> open
+              Invoke it from browser (Lambda -> configuration -> API Gateway -> API Endpoint -> invoke from postman or different browser
+
 Lab2 - write Lab2.go to create s3 bucket
 
 Lab1 -VqJ 
