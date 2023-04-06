@@ -1,3 +1,49 @@
+
+Lab5 - Customize API Gateway
+       create  API gateway for current lambda
+              create new API gateway - REST API -new resource  
+              Create new method -> post 
+                         Integration type   Lambda Function 
+                         Lambda region - 
+                         Lambda Function - ....
+               Edit Method Request
+                     Request Body ->Add Model 
+                                   Application/json -> Empty
+               Modify Integration Request 
+                     Mapping Template 
+                            add
+                                   application/json
+                                          {
+                                              "name":"FixedName"
+                                          }
+                Save -Test 
+                if successful -> Deploy API 
+                                   give any stage name
+                        copy url -> test from postman -> Forbiddon
+                        copy url for post method -> finish testing       
+
+          Modify 
+          create name model
+                 models -> create -> namemodel
+                        {
+                          "$schema" : "http://json-schema.org/draft-04/schema#",
+                          "title" : "name",
+                          "type" : "object",
+                          "properties" : {
+                            "username" : { "type" : "string" }
+                          }
+                        }
+                Modify Method Request -> request body->
+                        content type -App/json -> namemodel
+                 Modify integration request ->
+                               Mapping Template -> add for app/json
+                                      #set($inputRoot = $input.path('$'))
+                                      {
+                                        "name" : "$input.path('username')"
+                                      }
+                  Test -> from Console
+                          from Postman
+
 Lab4 - day4\demo2
           cmd>go.exe install github.com/aws/aws-lambda-go/cmd/build-lambda-zip@latest
                    in Demo1\main.go
